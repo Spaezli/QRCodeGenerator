@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox layoutX="128.0" layoutY="55.0" prefHeight="200.0" prefWidth="287.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox>
+                    <children>
+                        <Button fx:id="btn_load" mnemonicParsing="false" text="%btn_load" />
+                        <Button fx:id="btn_save" mnemonicParsing="false" text="%btn_save" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox>
+               <children>
+                  <TextField fx:id="txf_name" promptText="%txf_name">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="txf_type" layoutX="10.0" layoutY="10.0" promptText="%txf_type">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="txf_attr" layoutX="20.0" layoutY="20.0" promptText="%txf_attr">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></HBox>
+                <TableView fx:id="tbl" prefHeight="226.0" prefWidth="600.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="%col_name" />
+                        <TableColumn prefWidth="75.0" text="%col_type" />
+                        <TableColumn prefWidth="87.0" text="%col_attr" />
+                  <TableColumn prefWidth="87.0" text="%col_qr" />
+                    </columns>
+                </TableView>
+            <Label fx:id="lbl_status" prefWidth="Infinity" text="%lbl_status" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
