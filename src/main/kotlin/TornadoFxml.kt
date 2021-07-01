@@ -8,7 +8,6 @@ import javafx.util.*
 import tornadofx.*
 import javafx.event.*
 
-import model.QRManager
 import java.awt.Label
 import java.util.*
 

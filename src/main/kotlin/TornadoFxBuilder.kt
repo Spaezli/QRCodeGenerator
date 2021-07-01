@@ -1,4 +1,5 @@
 
+import javafx.beans.Observable
 import javafx.scene.control.Button
 import javafx.scene.control.TableView
 import javafx.scene.control.TextField
@@ -7,9 +8,6 @@ import javafx.stage.Stage
 import javafx.util.*
 import tornadofx.*
 import javafx.event.*
-import model.QR
-
-import model.QRManager
 import java.awt.Label
 import java.util.*
 
@@ -36,10 +34,11 @@ class QRCodeView2 : View("QRCodeViewer") {
 
     private val manager = QRManager()
 
+
     init {
         FX.locale = Locale.GERMAN
         FX.messages = ResourceBundle.getBundle("QRCodeGenerator",FX.locale)
-       // manager.restore()
+        manager.entries.add(QR("empy","empty",listOf("empty")))
 
 
 
@@ -61,7 +60,7 @@ class QRCodeView2 : View("QRCodeViewer") {
 
         }
 
-        tableview(manager.entries.asObservable()) {
+        tableview(manager.entries) {
             readonlyColumn(FX.messages["col_name"], QR::name){
 
             }

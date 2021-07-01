@@ -1,24 +1,24 @@
-package model
-
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import javafx.beans.InvalidationListener
-import javafx.beans.Observable
-import tornadofx.*
+import javafx.beans.property.SimpleListProperty
+import javafx.collections.ObservableList
 import java.io.FileOutputStream
 import java.io.FileReader
 import java.io.IOException
 import java.io.Serializable
 
+import tornadofx.*
 import tornadofx.getValue
 import tornadofx.setValue
 
+
 class QRManager()  {
-
-
-    var entries = mutableListOf<QR>()
-    val mapper = jacksonObjectMapper()
-
+    //The given mutableListOf<OR> is just the data which the entries/entriesProperty
+    //Shall be built on you could also just use use a variable provided from a constructor
+    //when initializing the class
+    private val entriesProperty = SimpleListProperty<QR>(this, "entries", mutableListOf<QR>().asObservable())
+    var entries: ObservableList<QR> by entriesProperty
+    private val mapper = jacksonObjectMapper()
 
     fun save() {
         try {
@@ -30,17 +30,14 @@ class QRManager()  {
         }
     }
 
-    /**
-     * Due to the @see #save() the mapper with the .writerWithDefaultPrettyPrinter
-     * prohibits the use of mapper within the FileInputStream().use function
-     */
     fun restore() {
         var jsonStr = ""
         FileReader("data/output/test.json").use { reader -> reader.forEachLine {jsonStr+=it} }
         //val jsonString: String = File("data/output/test.json").readText(Charsets.UTF_8)
-        entries = mapper.readValue<List<QR>>(jsonStr).toMutableList()
+        entries.addAll(mapper.readValue<List<QR>>(jsonStr).toObservable())
 
-        //this one one for whatever ...
+        //this one for whatever does not work ...
+        //My guess...because of the writerWithDefaultPrettyPrinter of the save() function
         /*
         mapper.registerKotlinModule()
         mapper.registerModule(JavaTimeModule())
@@ -71,4 +68,16 @@ class QR(
     val name: String = "",
     val type: String = "",
     val attr: List<String> = listOf<String>()
-) : Serializable
+) : Serializable 
+/*
+fun main(){
+    val t = mutableListOf<String>()
+    t.add("asdf")
+    val manager = QRManager()
+    manager.restore()
+    manager.entries.add(QR("newenew","",listOf("")))
+    print("sdf")
+
+}
+
+ */
